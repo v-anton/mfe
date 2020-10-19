@@ -1,0 +1,23 @@
+.button {
+  @apply rounded-lg relative;
+}
+
+.button:hover {
+  @apply shadow-lg;
+}
+
+.big {
+  @apply px-16 py-3 my-2;
+}
+
+.small {
+  @apply px-2 py-1 my-2;
+}
+
+.dark {
+  @apply text-white;
+}
+
+.light {
+  @apply bg-white border border-hs-lightgray;
+}

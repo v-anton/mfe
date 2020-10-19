@@ -1,0 +1,23 @@
+.h1 {
+  @apply text-hs-28px;
+}
+
+.h2 {
+  @apply text-2xl;
+}
+
+.h3 {
+  @apply text-hs-22px;
+}
+
+.h4 {
+  @apply text-xl;
+}
+
+.h5 {
+  @apply text-base;
+}
+
+.h6 {
+  @apply text-sm;
+}

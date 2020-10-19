@@ -1,0 +1,222 @@
+import {
+  faTachometerAlt,
+  faCog,
+  faHome,
+  faBed,
+  faBarcode,
+  faBoxOpen,
+  faTags,
+  faShoppingCart,
+  faGift,
+  faGlobeAmericas,
+  faEye,
+  faTasks,
+  faSortAmountDown,
+  faDollarSign,
+  faThumbtack,
+  faHdd,
+  faInfoCircle,
+  faUserCog,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { TODO_ANY } from "../../types/common";
+import { messages } from "./menu.messages";
+
+export const menu = [
+  {
+    id: "appshell.menu.hotel.dashboard",
+    type: "item",
+    message: messages.dashboard,
+    icon: faTachometerAlt,
+    href: "",
+    end: true,
+  },
+  {
+    id: "appshell.menu.hotel.settings",
+    type: "item",
+    message: messages.settings,
+    icon: faCog,
+    href: "settings",
+  },
+  {
+    type: "label",
+    message: messages.configuration,
+    href: "",
+  },
+  {
+    id: "appshell.menu.hotel.my-property",
+    type: "item",
+    message: messages["my-property"],
+    icon: faHome,
+    href: "my-property",
+  },
+  {
+    id: "appshell.menu.hotel.rooms",
+    type: "item",
+    message: messages.rooms,
+    icon: faBed,
+    href: "rooms",
+  },
+  {
+    id: "appshell.menu.hotel.rates",
+    type: "item",
+    message: messages.rates,
+    icon: faBarcode,
+    href: "rateplans",
+  },
+  {
+    id: "appshell.menu.hotel.products",
+    type: "item",
+    message: messages.products,
+    icon: faTags,
+    href: "products",
+  },
+  {
+    id: "appshell.menu.hotel.packages",
+    type: "item",
+    message: messages.packages,
+    icon: faBoxOpen,
+    href: "packages",
+  },
+  {
+    id: "appshell.menu.hotel.services",
+    type: "item",
+    message: messages.services,
+    icon: faShoppingCart,
+    href: "services",
+    end: false,
+  },
+  {
+    id: "appshell.menu.hotel.offers",
+    type: "item",
+    message: messages.offers,
+    icon: faGift,
+    href: "offers",
+  },
+  {
+    id: "appshell.menu.hotel.connectivity",
+    type: "item",
+    message: messages.connectivity,
+    icon: faGlobeAmericas,
+    href: "connectivity",
+  },
+  {
+    type: "label",
+    message: messages.distibution,
+    href: "",
+  },
+  {
+    id: "appshell.menu.hotel.overview",
+    type: "item",
+    message: messages.overview,
+    icon: faEye,
+    href: "overview",
+  },
+  {
+    id: "appshell.menu.hotel.availabilities",
+    type: "item",
+    message: messages.availabilities,
+    icon: faTasks,
+    href: "availabilities",
+  },
+  {
+    id: "appshell.menu.hotel.booking-rules",
+    type: "group",
+    message: messages["booking-rules"],
+    icon: faSortAmountDown,
+    href: "",
+  },
+  {
+    id: "appshell.menu.hotel.booking-rules.property",
+    type: "sub-item",
+    message: messages["booking-rules.property"],
+    href: "booking-rules/hotel",
+    parent: "appshell.menu.hotel.booking-rules",
+  },
+  {
+    id: "appshell.menu.hotel.booking-rules.rooms",
+    type: "sub-item",
+    message: messages["booking-rules.rooms"],
+    href: "booking-rules/rooms",
+    parent: "appshell.menu.hotel.booking-rules",
+  },
+  {
+    id: "appshell.menu.hotel.booking-rules.rates",
+    type: "sub-item",
+    message: messages["booking-rules.rates"],
+    href: "booking-rules/rates",
+    parent: "appshell.menu.hotel.booking-rules",
+  },
+  {
+    id: "appshell.menu.hotel.booking-rules.products",
+    type: "sub-item",
+    message: messages["booking-rules.products"],
+    href: "booking-rules/products",
+    parent: "appshell.menu.hotel.booking-rules",
+  },
+  {
+    id: "appshell.menu.hotel.prices",
+    type: "item",
+    message: messages.prices,
+    icon: faDollarSign,
+    href: "prices",
+  },
+  {
+    id: "appshell.menu.hotel.reservations",
+    type: "group",
+    message: messages.reservations,
+    icon: faThumbtack,
+    href: "",
+  },
+  {
+    id: "appshell.menu.hotel.reservations.new-reservations",
+    type: "sub-item",
+    message: messages["reservations.new-reservations"],
+    icon: "",
+    href: "reservations/new",
+    parent: "appshell.menu.hotel.reservations",
+  },
+  {
+    id: "appshell.menu.hotel.reservations.search",
+    type: "sub-item",
+    message: messages["reservations.search"],
+    icon: "",
+    href: "reservations/search",
+    parent: "appshell.menu.hotel.reservations",
+  },
+  {
+    type: "label",
+    message: messages.maintenance,
+    icon: "",
+    href: "",
+  },
+  {
+    id: "appshell.menu.hotel.history",
+    type: "item",
+    message: messages.history,
+    icon: faHdd,
+    href: "history",
+  },
+  {
+    id: "appshell.menu.hotel.support",
+    type: "item",
+    message: messages.support,
+    icon: faInfoCircle,
+    href: "support",
+  },
+  {
+    id: "appshell.menu.user.settings",
+    type: "item",
+    message: messages["user-settings"],
+    icon: faUserCog,
+    href: "user/settings",
+  },
+];
+
+export const getMessagesByPath: TODO_ANY = (path: string) => {
+  const item = menu.find((menuItem) => menuItem.href === path);
+  const parent = item?.parent
+    ? menu.find((parentItem) => parentItem.id === item?.parent)
+    : null;
+  return [parent?.message, item?.message].filter(Boolean);
+};

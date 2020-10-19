@@ -1,0 +1,463 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Address {
+  addressLine: String
+  cityName: String
+  countryCode: String
+  countryName: String
+  county: String
+  formattedAddress: String
+  formattedInd: Int
+  latitude: Float
+  longitude: Float
+  postalCode: String
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+  stateCode: String
+  stateProv: String
+  streetNmbr: String
+  useType: String
+  validInd: Int
+  validationStatus: String
+}
+
+type Basic {
+  formattedInd: Int
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+}
+
+type DataOwner {
+  createDateTime: String
+  dataOwnerId: String!
+  dataOwnerName: String
+  dataOwnerType: String
+  lastModifyDateTime: String
+  storageLocation: String
+}
+
+type Email {
+  defaultInd: Int
+  emailAddress: String
+  emailType: String
+  formattedInd: Int
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+  textFormat: String
+  validInd: Int
+}
+
+type MigrationFilename {
+  copyFilename: String!
+  copyStatus: MigrationStatusEnum
+  moveFilename: String!
+  moveStatus: MigrationStatusEnum
+}
+
+type Mutation {
+  addDataOwner(data: DataOwnerInput!): DataOwner!
+  deleteUserSettings(context: UserSettingsContextEnum!, contextId: String!): Boolean!
+  saveUserSettings(input: UserSettingsInput!): UserSettings!
+  storeProfile(createProfileData: StoreProfileInput!): StoreProfileResponse!
+  storeProfileOwnerConfig(createProfileOwnerConfigData: ProfileOwnerConfigInput!): ProfileOwnerConfig!
+  updateProfile(updateProfileData: UpdateProfileInput!): Profile!
+}
+
+type Phone {
+  areaCityCode: Float
+  countryAccessCode: Float
+  extension: Float
+  formattedInd: Int
+  id: String
+  phoneLocationType: String
+  phoneNumber: String
+  phoneTechType: String
+  phoneUseType: String
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+}
+
+type Profile {
+  addresses: [Address!]
+  birthDate: String
+  companyName: String
+  createDateTime: String
+  dataOwnerId: String
+  emails: [Email!]
+  gender: GenderTypeEnum
+  givenName: String
+  hotelId: [String!]!
+  id: ID!
+  jobTitle: String
+  language: String
+  lastModifyDateTime: String
+  maritalStatus: MaritalStatusTypeEnum
+  middleName: String
+  misc: String
+  namePrefix: String
+  nameSufix: String
+  nameTitle: String
+  ownerDetails: ProfileOwnerConfig
+  phones: [Phone!]
+  profileType: String
+  purgeDate: String
+  surname: String
+  username: String
+}
+
+type ProfileOwnerConfig {
+  createDateTime: String
+  dataOwnerId: String!
+  dataOwnerName: String
+  dataOwnerType: String
+  hotelId: String!
+  lastModifyDateTime: String
+  migrationFilename: MigrationFilename
+  storageLocation: String
+  underMigration: Boolean
+}
+
+type ProfileResponse {
+  id: String!
+}
+
+type Query {
+  anonymizeProfile(hotelId: String!, id: String!): Profile!
+  getDataOwner(dataOwnerId: String!): DataOwner!
+  getProfile(hotelId: String!, id: String!): Profile!
+  getProfileOwnerConfig(hotelId: String!): ProfileOwnerConfig!
+  getProfiles(hotelId: String!, ids: [String!]!): [Profile!]!
+  getUserSettings(context: UserSettingsContextEnum!, contextId: String!): UserSettings
+}
+
+type StoreProfileResponse {
+  batchId: String!
+  context: ContextEnum!
+  contextId: String!
+  hotelId: String!
+  profiles: [ProfileResponse!]!
+  webhookUrl: String
+}
+
+type Subscription {
+  onCreateBatch: StoreProfileResponse @aws_subscribe(mutations : ["storeProfile"])
+  onUpdateProfile: Profile @aws_subscribe(mutations : ["updateProfile"])
+}
+
+type UserSettings {
+  context: String!
+  contextId: String!
+  createDateTime: String
+  dateFormat: String
+  displayType: String
+  landingPage: String
+  language: String
+  lastModifyDateTime: String
+}
+
+enum AddressUseTypeEnum {
+  Billing
+  Chain
+  Collection
+  Contact
+  CreditCard
+  Delivery
+  Deposit
+  Hotel
+  Mailing
+  Other
+  Permanent
+  Physical
+  PreOpeningOffice
+}
+
+enum ContextEnum {
+  Hotel
+  HotelReservation
+  User
+}
+
+enum DateFormatEnum {
+  DDMMYYYY
+  YYYYMMDD
+  YYYY_MM_DD
+}
+
+enum DisplayTypeEnum {
+  Compressed
+  Normal
+}
+
+enum EmailAddressTypeEnum {
+  Business
+  Listserve
+  Personal
+}
+
+enum GenderTypeEnum {
+  Female
+  Male
+  Unknown
+}
+
+enum LandingPageEnum {
+  Bookingchannels
+  BookingrulesGuestrooms
+  BookingrulesHotel
+  BookingrulesRateplans
+  BookingrulesSellableproducts
+  Custombigtable
+  Home
+  Hotel
+  Inventories
+  Rates
+  ReservationsNew
+  ReservationsSearch
+}
+
+enum MaritalStatusTypeEnum {
+  Annulled
+  Cohabitating
+  Divorced
+  Engaged
+  Married
+  Separated
+  Single
+  Unknown
+  Widowed
+}
+
+enum MigrationStatusEnum {
+  Done
+  Initiated
+  Processing
+}
+
+enum PhoneLocationTypeEnum {
+  BrandReservationsOffice
+  CentralReservationsOffice
+  Home
+  ManagingCompany
+  Mobile
+  Office
+  Other
+  PropertyDirect
+  PropertyReservationOffice
+  SalesOffice
+}
+
+enum PhoneTechTypeEnum {
+  Data
+  Fax
+  Mobile
+  Pager
+  TTY
+  Telex
+  VoIP
+  Voice
+}
+
+enum PhoneUseTypeEnum {
+  Contact
+  DaytimeContact
+  ElectronicDocumentReference
+  EmergencyContact
+  EveningContact
+  GuestUse
+  Mobile
+  PickupContact
+  TollFreeNumber
+  TravelArranger
+}
+
+enum ProfileTypeEnum {
+  PRT_1
+  PRT_10
+  PRT_11
+  PRT_12
+  PRT_13
+  PRT_14
+  PRT_15
+  PRT_16
+  PRT_17
+  PRT_18
+  PRT_19
+  PRT_2
+  PRT_20
+  PRT_21
+  PRT_22
+  PRT_23
+  PRT_3
+  PRT_4
+  PRT_5
+  PRT_6
+  PRT_7
+  PRT_8
+  PRT_9
+}
+
+enum ShareMarketIndEnum {
+  Inherit
+  No
+  Yes
+}
+
+enum ShareSynchIndEnum {
+  Inherit
+  No
+  Yes
+}
+
+enum UserSettingsContextEnum {
+  User
+}
+
+enum UserSettingsLangEnum {
+  DE
+  EN
+  ES
+  FR
+  NL
+}
+
+input AddressInput {
+  addressLine: String
+  cityName: String
+  countryCode: String
+  countryName: String
+  county: String
+  formattedAddress: String
+  formattedInd: Int
+  latitude: Float
+  longitude: Float
+  postalCode: String
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+  stateCode: String
+  stateProv: String
+  streetNmbr: String
+  useType: AddressUseTypeEnum
+  validInd: Int
+  validationStatus: String
+}
+
+input BasicInput {
+  formattedInd: Int
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+}
+
+input DataOwnerInput {
+  dataOwnerId: String!
+  dataOwnerName: String
+  dataOwnerType: String
+  storageLocation: String
+}
+
+input EmailInput {
+  defaultInd: Int
+  emailAddress: String
+  emailType: EmailAddressTypeEnum
+  formattedInd: Int
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+  textFormat: String
+  validInd: Int
+}
+
+input PhoneInput {
+  areaCityCode: Float
+  countryAccessCode: Float
+  extension: Float
+  formattedInd: Int
+  id: String
+  phoneLocationType: PhoneLocationTypeEnum
+  phoneNumber: String
+  phoneTechType: PhoneTechTypeEnum
+  phoneUseType: PhoneUseTypeEnum
+  shareMarketInd: ShareMarketIndEnum
+  shareSynchInd: ShareSynchIndEnum
+}
+
+input ProfileInput {
+  address: AddressInput
+  addresses: [AddressInput!]
+  birthDate: String
+  companyCode: String
+  companyCodeContext: String
+  companyName: String
+  email: EmailInput
+  emails: [EmailInput!]
+  gender: GenderTypeEnum
+  givenName: String
+  hotelId: String
+  id: ID
+  jobTitle: String
+  language: String
+  maritalStatus: MaritalStatusTypeEnum
+  middleName: String
+  namePrefix: String
+  nameSufix: String
+  nameTitle: String
+  phone: PhoneInput
+  phones: [PhoneInput!]
+  profileType: ProfileTypeEnum
+  surname: String
+  username: String
+}
+
+input ProfileOwnerConfigInput {
+  dataOwnerId: String!
+  dataOwnerName: String
+  dataOwnerType: String
+  hotelId: String!
+  storageLocation: String
+}
+
+input StoreProfileInput {
+  context: ContextEnum!
+  contextId: String!
+  hotelId: String!
+  profiles: [ProfileInput!]!
+  webhookUrl: String
+}
+
+input UpdateProfileInput {
+  address: AddressInput
+  addresses: [AddressInput!]
+  birthDate: String
+  companyCode: String
+  companyCodeContext: String
+  companyName: String
+  email: EmailInput
+  emails: [EmailInput!]
+  gender: GenderTypeEnum
+  givenName: String
+  hotelId: String!
+  id: ID!
+  jobTitle: String
+  language: String
+  maritalStatus: MaritalStatusTypeEnum
+  middleName: String
+  namePrefix: String
+  nameSufix: String
+  nameTitle: String
+  phone: PhoneInput
+  phones: [PhoneInput!]
+  profileType: ProfileTypeEnum
+  surname: String
+  username: String
+}
+
+input UserSettingsInput {
+  context: UserSettingsContextEnum!
+  contextId: String!
+  dateFormat: DateFormatEnum
+  displayType: DisplayTypeEnum
+  landingPage: LandingPageEnum
+  language: UserSettingsLangEnum
+}

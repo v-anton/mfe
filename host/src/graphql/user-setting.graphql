@@ -1,0 +1,10 @@
+query GetProfile {
+  getProfile(context: User, contextId: "test-UserID") {
+    id
+    givenName
+    language
+    lastModifyDateTime
+    maritalStatus
+    middleName
+  }
+}

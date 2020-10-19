@@ -1,0 +1,31 @@
+.wrapper {
+  @apply my-8 flex flex-col items-center;
+}
+
+.label {
+  @apply text-white text-sm text-center my-2 uppercase;
+}
+
+.container {
+  @apply flex my-2 relative;
+}
+
+.input {
+  @apply text-sm text-white border border-hs-yellow bg-transparent rounded-lg px-4 pr-24 py-2 font-black shadow-md block w-full appearance-none leading-normal;
+}
+
+.input:focus {
+  @apply outline-none;
+}
+
+.input::placeholder {
+  @apply text-hs-yellow;
+}
+
+.submit {
+  @apply bg-hs-yellow rounded-lg absolute top-0 right-0 bottom-0 px-5 text-white uppercase;
+}
+
+.submit:focus {
+  @apply outline-none;
+}

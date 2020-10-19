@@ -1,0 +1,19 @@
+diff --git a/node_modules/@aws-sdk/client-cognito-identity/dist/es/runtimeConfig.browser.js b/node_modules/@aws-sdk/client-cognito-identity/dist/es/runtimeConfig.browser.js
+index 8186637..29306ed 100644
+--- a/node_modules/@aws-sdk/client-cognito-identity/dist/es/runtimeConfig.browser.js
++++ b/node_modules/@aws-sdk/client-cognito-identity/dist/es/runtimeConfig.browser.js
+@@ -1,5 +1,5 @@
+ import { __assign } from "tslib";
+-import { name, version } from "./package.json";
++import packageJson from "./package.json";
+ import { Sha256 } from "@aws-crypto/sha256-browser";
+ import { FetchHttpHandler, streamCollector } from "@aws-sdk/fetch-http-handler";
+ import { invalidFunction } from "@aws-sdk/invalid-dependency";
+@@ -10,5 +10,5 @@ import { calculateBodyLength } from "@aws-sdk/util-body-length-browser";
+ import { defaultUserAgent } from "@aws-sdk/util-user-agent-browser";
+ import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-browser";
+ import { ClientSharedValues } from "./runtimeConfig.shared";
+-export var ClientDefaultValues = __assign(__assign({}, ClientSharedValues), { runtime: "browser", base64Decoder: fromBase64, base64Encoder: toBase64, bodyLengthChecker: calculateBodyLength, credentialDefaultProvider: (function () { }), defaultUserAgent: defaultUserAgent(name, version), maxAttempts: DEFAULT_MAX_ATTEMPTS, region: invalidFunction("Region is missing"), requestHandler: new FetchHttpHandler(), sha256: Sha256, streamCollector: streamCollector, urlParser: parseUrl, utf8Decoder: fromUtf8, utf8Encoder: toUtf8 });
++export var ClientDefaultValues = __assign(__assign({}, ClientSharedValues), { runtime: "browser", base64Decoder: fromBase64, base64Encoder: toBase64, bodyLengthChecker: calculateBodyLength, credentialDefaultProvider: (function () { }), defaultUserAgent: defaultUserAgent(packageJson.name, packageJson.version), maxAttempts: DEFAULT_MAX_ATTEMPTS, region: invalidFunction("Region is missing"), requestHandler: new FetchHttpHandler(), sha256: Sha256, streamCollector: streamCollector, urlParser: parseUrl, utf8Decoder: fromUtf8, utf8Encoder: toUtf8 });
+ //# sourceMappingURL=runtimeConfig.browser.js.map
+\ No newline at end of file

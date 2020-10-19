@@ -1,0 +1,12 @@
+{
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "editor.formatOnSave": true,
+  "conventionalCommits.scopes": [
+    "appshell",
+    "global",
+    "login-page",
+    "settings-page"
+  ]
+}
